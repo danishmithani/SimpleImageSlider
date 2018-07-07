@@ -1,0 +1,85 @@
+<!-- refer : https://youtu.be/7ZO2RTMNSAY -->
+<html>
+	<head>
+		<title>HTML Slider</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="mystyle.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<div id="arrow-left" class="arrow"></div>
+			<div id="slider">
+				<div class="slide slide1">
+					<div class="slide-content">
+						<span>Image One</span>
+					</div>
+				</div>
+				<div class="slide slide2">
+					<div class="slide-content">
+						<span>Image Two</span>
+					</div>
+				</div>
+				<div class="slide slide3">
+					<div class="slide-content">
+						<span>Image Three</span>
+					</div>
+				</div>
+				<div class="slide slide4">
+					<div class="slide-content">
+						<span>Image Four</span>
+					</div>
+				</div>
+			</div>
+			<div id="arrow-right" class="arrow"></div>
+		</div>
+
+		<script>
+			var SliderImages = document.querySelectorAll(".slide"),
+				ArrowLeft = document.querySelector("#arrow-left"),
+				ArrowRight = document.querySelector("#arrow-right"),
+				current = 0 ;  //represent which slide we are on at present
+			//clear all images	
+			function reset() {
+				for(var i=0;i<SliderImages.length;i++)
+				{	
+					SliderImages[i].style.display="none";
+				}	
+			}	
+			//initialize slider
+			function initslider() {
+				reset();
+				SliderImages[0].style.display="block";
+			}
+			function SliderLeft() {
+				reset();
+				SliderImages[current - 1].style.display="block";
+				current--;   //to keep current at 'current - 1'
+			}
+
+			ArrowLeft.addEventListener("click", function(){
+				if(current === 0) {
+					current = SliderImages.length;
+				}
+				SliderLeft();
+			});
+			function SliderRight() {
+				reset();
+				SliderImages[current + 1].style.display="block";
+				current++;   //to keep current at 'current + 1'
+			}
+
+			ArrowRight.addEventListener("click", function(){
+				if(current === SliderImages.length - 1) { //as current ranges from 0 to 3
+					current = -1;
+				}
+				SliderRight();
+			});
+
+
+			initslider();
+		</script>
+
+	</body>
+</html>
